@@ -18,12 +18,12 @@
 
 	&__title {
 		font-size: 24px;
-    	line-height: 1.4;
+		line-height: 1.4;
 	}
 
 	&__subtitle {
 		font-size: 20px;
-    	line-height: 1.4;
+		line-height: 1.4;
 		font-style: italic;
 		margin-top: 10px;
 	}
@@ -31,7 +31,7 @@
 	&__type {
 		font-weight: 700;
 		font-size: 30px;
-    	line-height: 1.4;
+		line-height: 1.4;
 		margin-top: 50px;
 	}
 
@@ -40,6 +40,20 @@
 		flex-direction: column;
 		gap: 10px;
 		margin-top: 20px;
+	}
+
+	&__error {
+		width: 100%;
+		color: red;
+		font-size: 20px;
+		margin-top: 10px;
+	}
+
+	&__result {
+		font-weight: 700;
+		font-size: 40px;
+		line-height: 1.4;
+		text-align: center;
 	}
 }
 
@@ -52,7 +66,7 @@
 	height: 100%;
 	background-color: #eee;
 	border: 1px solid #bbb;
-    border-radius: 5px;
+	border-radius: 5px;
 	transition: 0.3s ease;
 
 	&:hover {
@@ -154,10 +168,10 @@
 .button {
 	padding: 8px 35px;
 	background-color: #4aa3fc;
-    color: #fff;
+	color: #fff;
 	border-radius: 5px;
 	font-size: 20px;
-    line-height: 1.5;
+	line-height: 1.5;
 	margin-top: 50px;
 	cursor: pointer;
 	transition: 0.3s ease;
@@ -166,4 +180,8 @@
 		background-color: #2490fb;
 		color: #fff;
 	}
+}
+
+.d-none {
+	display: none;
 }

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <link href="css/main.min.css" rel="stylesheet" type="text/css">
+    <title>Стартовая страница</title>
+  </head>
+  <body class="map-page">
+    <form class="quiz" action="" method="post">
+      <div class="quiz__container container">
+        <div class="quiz__step quiz__step--1 open">
+          <div class="quiz__title">Если говорить о российских производителях компьютерной техники, какие компании Вы знаете?</div>
+          <div class="quiz__fields">
+            <label class="field js-toggle-field active"><span class="field__label">1-я компания</span>
+              <input class="field__input" type="text" name="company-1" placeholder="Введите название компании">
+            </label>
+            <label class="field js-toggle-field"><span class="field__label">2-я компания</span>
+              <input class="field__input" type="text" name="company-2" placeholder="Введите название компании">
+            </label>
+            <label class="field js-toggle-field"><span class="field__label">3-я компания</span>
+              <input class="field__input" type="text" name="company-3" placeholder="Введите название компании">
+            </label>
+            <label class="field js-toggle-field closed"><span class="field__label">4-я компания</span>
+              <input class="field__input" type="text" name="company-4" placeholder="Введите название компании">
+            </label>
+            <label class="field js-toggle-field closed"><span class="field__label">5-я компания</span>
+              <input class="field__input" type="text" name="company-5" placeholder="Введите название компании">
+            </label>
+            <label class="field js-toggle-field closed"><span class="field__label">6-я компания</span>
+              <input class="field__input" type="text" name="company-6" placeholder="Введите название компании">
+            </label>
+            <label class="field js-toggle-field closed"><span class="field__label">7-я компания</span>
+              <input class="field__input" type="text" name="company-7" placeholder="Введите название компании">
+            </label>
+          </div>
+        </div>
+        <div class="quiz__step quiz__step--2">
+          <div class="quiz__title">Каких российских производителей компьютерной техники, указанных ниже, Вы знаете? Пожалуйста, отметьте все компании, которые Вы знаете, даже те, которые указывали ранее. </div>
+          <div class="quiz__fields">
+            <label class="field field--checkbox">
+              <input class="field__input" type="checkbox" name="aquarius" value="Aquarius (Аквариус)"><span class="field__label">Aquarius (Аквариус)</span><b></b>
+            </label>
+            <label class="field field--checkbox">
+              <input class="field__input" type="checkbox" name="depo" value="Depo (Депо)"><span class="field__label">Depo (Депо)</span><b></b>
+            </label>
+            <label class="field field--checkbox">
+              <input class="field__input" type="checkbox" name="f_plus" value="F+ (Эф Плюс)"><span class="field__label">F+ (Эф Плюс)</span><b></b>
+            </label>
+            <label class="field field--checkbox">
+              <input class="field__input" type="checkbox" name="icl" value="ICL (Ай Си Эл)"><span class="field__label">ICL (Ай Си Эл)</span><b></b>
+            </label>
+            <label class="field field--checkbox">
+              <input class="field__input" type="checkbox" name="iru" value="iRu (Ай Ру)"><span class="field__label">iRu (Ай Ру)</span><b></b>
+            </label>
+            <label class="field field--checkbox">
+              <input class="field__input" type="checkbox" name="kraftway" value="Kraftway (Крафтвэй)"><span class="field__label">Kraftway (Крафтвэй)</span><b></b>
+            </label>
+            <label class="field field--checkbox">
+              <input class="field__input" type="checkbox" name="yadro" value="Yadro (Ядро)"><span class="field__label">Yadro (Ядро)</span><b></b>
+            </label>
+            <label class="field field--checkbox">
+              <input class="field__input" type="checkbox" name="kvadra" value="Квадра"><span class="field__label">Квадра</span><b></b>
+            </label>
+            <label class="field field--checkbox">
+              <input class="field__input" type="checkbox" name="graviton" value="Гравитон"><span class="field__label">Гравитон</span><b></b>
+            </label>
+            <label class="field js-toggle-field"><span class="field__label">Другое</span>
+              <input class="field__input" type="text" name="other" placeholder="Введите название компании">
+            </label>
+            <label class="field field--checkbox js-reset-fields">
+              <input class="field__input" type="checkbox" name="so_hard" value="Затрудняюсь ответить"><span class="field__label">Затрудняюсь ответить</span><b></b>
+            </label>
+          </div>
+        </div>
+        <div class="quiz__step quiz__step--3">
+          <div class="quiz__title">Оцените, каким компаниям российских производителей компьютерной техники лучше всего подходят следующие характеристики?</div>
+          <div class="quiz__subtitle">Вы можете выбрать несколько компаний для одной характеристики, либо не отметить ни одной компании.</div>
+          <div class="quiz__type">Надежная</div>
+          <div class="quiz__fields">
+            <label class="field field--checkbox js-check-nothing">
+              <input class="field__input" type="checkbox" name="nothing"><span class="field__label">Ни одной из перечисленных</span><b></b>
+            </label>
+          </div>
+        </div>
+        <div class="quiz__step quiz__step--4">
+          <div class="quiz__title">Оцените, каким компаниям российских производителей компьютерной техники лучше всего подходят следующие характеристики?</div>
+          <div class="quiz__subtitle">Вы можете выбрать несколько компаний для одной характеристики, либо не отметить ни одной компании.</div>
+          <div class="quiz__type">Ответственная</div>
+          <div class="quiz__fields">
+            <label class="field field--checkbox js-check-nothing">
+              <input class="field__input" type="checkbox" name="nothing"><span class="field__label">Ни одной из перечисленных</span><b></b>
+            </label>
+          </div>
+        </div>
+        <div class="quiz__step quiz__step--5">
+          <div class="quiz__title">Оцените, каким компаниям российских производителей компьютерной техники лучше всего подходят следующие характеристики?</div>
+          <div class="quiz__subtitle">Вы можете выбрать несколько компаний для одной характеристики, либо не отметить ни одной компании.</div>
+          <div class="quiz__type">Клиентоориентированная</div>
+          <div class="quiz__fields">
+            <label class="field field--checkbox js-check-nothing">
+              <input class="field__input" type="checkbox" name="nothing"><span class="field__label">Ни одной из перечисленных</span><b></b>
+            </label>
+          </div>
+        </div>
+        <div class="quiz__step quiz__step--6">
+          <div class="quiz__title">Оцените, каким компаниям российских производителей компьютерной техники лучше всего подходят следующие характеристики?</div>
+          <div class="quiz__subtitle">Вы можете выбрать несколько компаний для одной характеристики, либо не отметить ни одной компании.</div>
+          <div class="quiz__type">Инновационная</div>
+          <div class="quiz__fields">
+            <label class="field field--checkbox js-check-nothing">
+              <input class="field__input" type="checkbox" name="nothing"><span class="field__label">Ни одной из перечисленных</span><b></b>
+            </label>
+          </div>
+        </div>
+        <div class="quiz__step quiz__step--7">
+          <div class="quiz__title">Оцените, каким компаниям российских производителей компьютерной техники лучше всего подходят следующие характеристики?</div>
+          <div class="quiz__subtitle">Вы можете выбрать несколько компаний для одной характеристики, либо не отметить ни одной компании.</div>
+          <div class="quiz__type">Эффективная</div>
+          <div class="quiz__fields">
+            <label class="field field--checkbox js-check-nothing">
+              <input class="field__input" type="checkbox" name="nothing"><span class="field__label">Ни одной из перечисленных</span><b></b>
+            </label>
+          </div>
+        </div>
+        <div class="quiz__step quiz__step--8">
+          <div class="quiz__title">Оцените, каким компаниям российских производителей компьютерной техники лучше всего подходят следующие характеристики?</div>
+          <div class="quiz__subtitle">Вы можете выбрать несколько компаний для одной характеристики, либо не отметить ни одной компании.</div>
+          <div class="quiz__type">Современная</div>
+          <div class="quiz__fields">
+            <label class="field field--checkbox js-check-nothing">
+              <input class="field__input" type="checkbox" name="nothing"><span class="field__label">Ни одной из перечисленных</span><b></b>
+            </label>
+          </div>
+        </div>
+        <div class="quiz__step quiz__step--9">
+          <div class="quiz__title">Оцените, каким компаниям российских производителей компьютерной техники лучше всего подходят следующие характеристики?</div>
+          <div class="quiz__subtitle">Вы можете выбрать несколько компаний для одной характеристики, либо не отметить ни одной компании.</div>
+          <div class="quiz__type">Технологичная</div>
+          <div class="quiz__fields">
+            <label class="field field--checkbox js-check-nothing">
+              <input class="field__input" type="checkbox" name="nothing"><span class="field__label">Ни одной из перечисленных</span><b></b>
+            </label>
+          </div>
+        </div>
+        <div class="quiz__step quiz__step--10">
+          <div class="quiz__title">Оцените, каким компаниям российских производителей компьютерной техники лучше всего подходят следующие характеристики?</div>
+          <div class="quiz__subtitle">Вы можете выбрать несколько компаний для одной характеристики, либо не отметить ни одной компании.</div>
+          <div class="quiz__type">Открытая</div>
+          <div class="quiz__fields">
+            <label class="field field--checkbox js-check-nothing">
+              <input class="field__input" type="checkbox" name="nothing"><span class="field__label">Ни одной из перечисленных</span><b></b>
+            </label>
+          </div>
+        </div>
+        <div class="quiz__step quiz__step--11">
+          <div class="quiz__result">Спасибо за участие в исследовании!</div>
+        </div>
+        <div class="quiz__error d-none">Хотя бы одно поле должно быть выбрано</div>
+        <button class="quiz__next button">Больше не знаю</button>
+      </div>
+    </form>
+  </body>
+  <script src="js/main.min.js"></script>
+</html>
