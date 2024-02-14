@@ -1,0 +1,169 @@
+.quiz {
+	padding: 50px 0;
+
+	&__container {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+	}
+
+	&__step {
+		display: none;
+
+		&.open {
+			display: block;
+		}
+	}
+
+	&__title {
+		font-size: 24px;
+    	line-height: 1.4;
+	}
+
+	&__subtitle {
+		font-size: 20px;
+    	line-height: 1.4;
+		font-style: italic;
+		margin-top: 10px;
+	}
+
+	&__type {
+		font-weight: 700;
+		font-size: 30px;
+    	line-height: 1.4;
+		margin-top: 50px;
+	}
+
+	&__fields {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+		margin-top: 20px;
+	}
+}
+
+.field {
+	$parent: &;
+
+	position: relative;
+	display: block;
+	width: 100%;
+	height: 100%;
+	background-color: #eee;
+	border: 1px solid #bbb;
+    border-radius: 5px;
+	transition: 0.3s ease;
+
+	&:hover {
+		background-color: #c7e3ff;
+	}
+
+	&.closed {
+		display: none;
+	}
+
+	&.active {
+		background-color: #4aa3fc;
+
+		#{$parent} {
+			&__label {
+				color: #fff;
+			}
+
+			&__input {
+				display: block;
+			}
+		}
+	}
+
+	&--checkbox {
+		background-color: transparent;
+		border: 0;
+
+		&:hover {
+			background-color: transparent;
+
+			b {
+				background-color: #c7e3ff;
+			}
+		}
+
+		b {
+			position: absolute;
+			inset: 0;
+			z-index: -1;
+			background-color: #eee;
+			border: 1px solid #bbb;
+			border-radius: 5px;
+			transition: 0.3s ease;
+		}
+
+		#{$parent} {
+			&__input:checked + span {
+				color: #fff;
+
+				& + b {
+					background-color: #4aa3fc;
+				}
+			}
+		}
+	}
+
+	&__label {
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 5px 15px;
+		font-size: 19px;
+		line-height: 1.2;
+		cursor: pointer;
+		transition: 0.3s ease;
+	}
+
+	&__input {
+		display: none;
+		width: calc(100% - 30px);
+		height: 52px;
+		background-color: #fff;
+		border: 1px solid #ccc;
+		border-radius: 4px;
+		box-sizing: border-box;
+		margin: 5px 15px 15px;
+		padding: 5px 15px;
+		color: #333;
+		font-weight: 500;
+		font-size: 14px;
+		line-height: 20px;
+		resize: none;
+		transition: border-color 0.3s ease;
+
+		&:hover,
+		&:focus {
+			border-color: #66afe9;
+		}
+
+		&::placeholder {
+			color: rgba(51, 51, 51, 0.5);
+			font-size: 14px;
+		}
+	}
+}
+
+.button {
+	padding: 8px 35px;
+	background-color: #4aa3fc;
+    color: #fff;
+	border-radius: 5px;
+	font-size: 20px;
+    line-height: 1.5;
+	margin-top: 50px;
+	cursor: pointer;
+	transition: 0.3s ease;
+
+	&:hover {
+		background-color: #2490fb;
+		color: #fff;
+	}
+}

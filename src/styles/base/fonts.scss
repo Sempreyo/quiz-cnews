@@ -1,0 +1,35 @@
+@font-face {
+	font-family: 'GolosText';
+	src: local('GolosText');
+	src: url('../fonts/GolosText-Regular.eot');
+	src: url('../fonts/GolosText-Regular.eot?#iefix') format('embedded-opentype'),
+			 url('../fonts/GolosText-Regular.woff2') format('woff2'),
+			 url('../fonts/GolosText-Regular.woff') format('woff'),
+			 url('../fonts/GolosText-Regular.ttf') format('truetype');
+	font-weight: 400;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'GolosText';
+	src: local('GolosText');
+	src: url('../fonts/GolosText-Medium.eot');
+	src: url('../fonts/GolosText-Medium.eot?#iefix') format('embedded-opentype'),
+	url('../fonts/GolosText-Medium.woff2') format('woff2'),
+	url('../fonts/GolosText-Medium.woff') format('woff'),
+	url('../fonts/GolosText-Medium.ttf') format('truetype');
+	font-weight: 500;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Gilroy';
+	src: local('Gilroy');
+	src: url('../fonts/Gilroy-Medium.eot');
+	src: url('../fonts/Gilroy-Medium.eot?#iefix') format('embedded-opentype'),
+	url('../fonts/Gilroy-Medium.woff2') format('woff2'),
+	url('../fonts/Gilroy-Medium.woff') format('woff'),
+	url('../fonts/Gilroy-Medium.ttf') format('truetype');
+	font-weight: 500;
+	font-display: swap;
+}
