@@ -63,7 +63,6 @@ function styles() {
 		.pipe(sass())
 		.pipe(concat('main.min.css'))
 		.pipe(autoprefixer({overrideBrowserslist: ['last 10 versions'], grid: true}))
-		.pipe(cleancss({level: {1: {specialComments: 0}}}))
 		.pipe(sourcemaps.write('./maps'))
 		.pipe(dest('public/css/'))
 		.pipe(browserSync.stream())

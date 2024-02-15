@@ -67,6 +67,27 @@
 		line-height: 1.4;
 		text-align: center;
 	}
+
+	&__next {
+		padding: 8px 35px;
+		background-color: #4aa3fc;
+		color: #fff;
+		border-radius: 5px;
+		font-size: 20px;
+		line-height: 1.5;
+		margin-top: 50px;
+		cursor: pointer;
+		transition: 0.3s ease;
+	
+		&:hover {
+			background-color: #2490fb;
+			color: #fff;
+		}
+	}
+	
+	.d-none {
+		display: none;
+	}
 }
 
 .field {
@@ -175,25 +196,4 @@
 			font-size: 14px;
 		}
 	}
-}
-
-.button {
-	padding: 8px 35px;
-	background-color: #4aa3fc;
-	color: #fff;
-	border-radius: 5px;
-	font-size: 20px;
-	line-height: 1.5;
-	margin-top: 50px;
-	cursor: pointer;
-	transition: 0.3s ease;
-
-	&:hover {
-		background-color: #2490fb;
-		color: #fff;
-	}
-}
-
-.d-none {
-	display: none;
 }

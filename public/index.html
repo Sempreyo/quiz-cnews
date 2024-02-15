@@ -20,7 +20,7 @@
         <div class="quiz__step quiz__step--2">
           <div class="quiz__title hidden">Мы хотели бы поговорить с Вами о российском рынке производителей компьютерной техники. </div>
         </div>
-        <div class="quiz__step quiz__step--3">
+        <div class="quiz__step quiz__step--3" data-step="step-1">
           <div class="quiz__title">Если говорить о российских производителях компьютерной техники, какие компании Вы знаете?</div>
           <div class="quiz__fields">
             <label class="field js-toggle-field active"><span class="field__label">1-я компания</span>
@@ -46,35 +46,35 @@
             </label>
           </div>
         </div>
-        <div class="quiz__step quiz__step--4">
+        <div class="quiz__step quiz__step--4" data-step="step-2">
           <div class="quiz__title">Каких российских производителей компьютерной техники, указанных ниже, Вы знаете? Пожалуйста, отметьте все компании, которые Вы знаете, даже те, которые указывали ранее. </div>
           <div class="quiz__fields">
             <label class="field field--checkbox">
-              <input class="field__input" type="checkbox" name="aquarius" value="Aquarius (Аквариус)"><span class="field__label">Aquarius (Аквариус)</span><b></b>
+              <input class="field__input" type="checkbox" name="rus-company" value="aquarius"><span class="field__label">Aquarius (Аквариус)</span><b></b>
             </label>
             <label class="field field--checkbox">
-              <input class="field__input" type="checkbox" name="depo" value="Depo (Депо)"><span class="field__label">Depo (Депо)</span><b></b>
+              <input class="field__input" type="checkbox" name="rus-company" value="depo"><span class="field__label">Depo (Депо)</span><b></b>
             </label>
             <label class="field field--checkbox">
-              <input class="field__input" type="checkbox" name="f_plus" value="F+ (Эф Плюс)"><span class="field__label">F+ (Эф Плюс)</span><b></b>
+              <input class="field__input" type="checkbox" name="rus-company" value="fplus"><span class="field__label">F+ (Эф Плюс)</span><b></b>
             </label>
             <label class="field field--checkbox">
-              <input class="field__input" type="checkbox" name="icl" value="ICL (Ай Си Эл)"><span class="field__label">ICL (Ай Си Эл)</span><b></b>
+              <input class="field__input" type="checkbox" name="rus-company" value="iCL"><span class="field__label">ICL (Ай Си Эл)</span><b></b>
             </label>
             <label class="field field--checkbox">
-              <input class="field__input" type="checkbox" name="iru" value="iRu (Ай Ру)"><span class="field__label">iRu (Ай Ру)</span><b></b>
+              <input class="field__input" type="checkbox" name="rus-company" value="iRu"><span class="field__label">iRu (Ай Ру)</span><b></b>
             </label>
             <label class="field field--checkbox">
-              <input class="field__input" type="checkbox" name="kraftway" value="Kraftway (Крафтвэй)"><span class="field__label">Kraftway (Крафтвэй)</span><b></b>
+              <input class="field__input" type="checkbox" name="rus-company" value="kraftway"><span class="field__label">Kraftway (Крафтвэй)</span><b></b>
             </label>
             <label class="field field--checkbox">
-              <input class="field__input" type="checkbox" name="yadro" value="Yadro (Ядро)"><span class="field__label">Yadro (Ядро)</span><b></b>
+              <input class="field__input" type="checkbox" name="rus-company" value="yadro"><span class="field__label">Yadro (Ядро)</span><b></b>
             </label>
             <label class="field field--checkbox">
-              <input class="field__input" type="checkbox" name="kvadra" value="Квадра"><span class="field__label">Квадра</span><b></b>
+              <input class="field__input" type="checkbox" name="rus-company" value="kvadra"><span class="field__label">Квадра</span><b></b>
             </label>
             <label class="field field--checkbox">
-              <input class="field__input" type="checkbox" name="graviton" value="Гравитон"><span class="field__label">Гравитон</span><b></b>
+              <input class="field__input" type="checkbox" name="rus-company" value="graviton"><span class="field__label">Гравитон</span><b></b>
             </label>
             <label class="field js-toggle-field"><span class="field__label">Другое</span>
               <input class="field__input" type="text" name="other" placeholder="Введите название компании">
@@ -84,83 +84,83 @@
             </label>
           </div>
         </div>
-        <div class="quiz__step quiz__step--5" data-name="nadezhnaya">
+        <div class="quiz__step quiz__step--5" data-name="nadezhnaya" data-step="step-3">
           <div class="quiz__title">Оцените, каким компаниям российских производителей компьютерной техники лучше всего подходят следующие характеристики?</div>
           <div class="quiz__subtitle">Вы можете выбрать несколько компаний для одной характеристики, либо не отметить ни одной компании.</div>
           <div class="quiz__type">Надежная</div>
           <div class="quiz__fields">
             <label class="field field--checkbox js-check-nothing">
-              <input class="field__input" type="checkbox" name="nothing"><span class="field__label">Ни одной из перечисленных</span><b></b>
+              <input class="field__input" type="checkbox" name="nadezhnaya_nothing"><span class="field__label">Ни одной из перечисленных</span><b></b>
             </label>
           </div>
         </div>
-        <div class="quiz__step quiz__step--6" data-name="otvetstvennaya">
+        <div class="quiz__step quiz__step--6" data-name="otvetstvennaya" data-step="step-4">
           <div class="quiz__title">Оцените, каким компаниям российских производителей компьютерной техники лучше всего подходят следующие характеристики?</div>
           <div class="quiz__subtitle">Вы можете выбрать несколько компаний для одной характеристики, либо не отметить ни одной компании.</div>
           <div class="quiz__type">Ответственная</div>
           <div class="quiz__fields">
             <label class="field field--checkbox js-check-nothing">
-              <input class="field__input" type="checkbox" name="nothing"><span class="field__label">Ни одной из перечисленных</span><b></b>
+              <input class="field__input" type="checkbox" name="otvetstvennaya_nothing"><span class="field__label">Ни одной из перечисленных</span><b></b>
             </label>
           </div>
         </div>
-        <div class="quiz__step quiz__step--7" data-name="otvetstvennaya">
+        <div class="quiz__step quiz__step--7" data-name="klientoorientirovannaya" data-step="step-5">
           <div class="quiz__title">Оцените, каким компаниям российских производителей компьютерной техники лучше всего подходят следующие характеристики?</div>
           <div class="quiz__subtitle">Вы можете выбрать несколько компаний для одной характеристики, либо не отметить ни одной компании.</div>
           <div class="quiz__type">Клиентоориентированная</div>
           <div class="quiz__fields">
             <label class="field field--checkbox js-check-nothing">
-              <input class="field__input" type="checkbox" name="nothing"><span class="field__label">Ни одной из перечисленных</span><b></b>
+              <input class="field__input" type="checkbox" name="klientoorientirovannaya_nothing"><span class="field__label">Ни одной из перечисленных</span><b></b>
             </label>
           </div>
         </div>
-        <div class="quiz__step quiz__step--8" data-name="innovatsionnaya">
+        <div class="quiz__step quiz__step--8" data-name="innovatsionnaya" data-step="step-6">
           <div class="quiz__title">Оцените, каким компаниям российских производителей компьютерной техники лучше всего подходят следующие характеристики?</div>
           <div class="quiz__subtitle">Вы можете выбрать несколько компаний для одной характеристики, либо не отметить ни одной компании.</div>
           <div class="quiz__type">Инновационная</div>
           <div class="quiz__fields">
             <label class="field field--checkbox js-check-nothing">
-              <input class="field__input" type="checkbox" name="nothing"><span class="field__label">Ни одной из перечисленных</span><b></b>
+              <input class="field__input" type="checkbox" name="innovatsionnaya_nothing"><span class="field__label">Ни одной из перечисленных</span><b></b>
             </label>
           </div>
         </div>
-        <div class="quiz__step quiz__step--9" data-name="effektivnaya">
+        <div class="quiz__step quiz__step--9" data-name="effektivnaya" data-step="step-7">
           <div class="quiz__title">Оцените, каким компаниям российских производителей компьютерной техники лучше всего подходят следующие характеристики?</div>
           <div class="quiz__subtitle">Вы можете выбрать несколько компаний для одной характеристики, либо не отметить ни одной компании.</div>
           <div class="quiz__type">Эффективная</div>
           <div class="quiz__fields">
             <label class="field field--checkbox js-check-nothing">
-              <input class="field__input" type="checkbox" name="nothing"><span class="field__label">Ни одной из перечисленных</span><b></b>
+              <input class="field__input" type="checkbox" name="effektivnaya_nothing"><span class="field__label">Ни одной из перечисленных</span><b></b>
             </label>
           </div>
         </div>
-        <div class="quiz__step quiz__step--10" data-name="sovremennaya">
+        <div class="quiz__step quiz__step--10" data-name="sovremennaya" data-step="step-8">
           <div class="quiz__title">Оцените, каким компаниям российских производителей компьютерной техники лучше всего подходят следующие характеристики?</div>
           <div class="quiz__subtitle">Вы можете выбрать несколько компаний для одной характеристики, либо не отметить ни одной компании.</div>
           <div class="quiz__type">Современная</div>
           <div class="quiz__fields">
             <label class="field field--checkbox js-check-nothing">
-              <input class="field__input" type="checkbox" name="nothing"><span class="field__label">Ни одной из перечисленных</span><b></b>
+              <input class="field__input" type="checkbox" name="sovremennaya_nothing"><span class="field__label">Ни одной из перечисленных</span><b></b>
             </label>
           </div>
         </div>
-        <div class="quiz__step quiz__step--11" data-name="tekhnologichnaya">
+        <div class="quiz__step quiz__step--11" data-name="tekhnologichnaya" data-step="step-9">
           <div class="quiz__title">Оцените, каким компаниям российских производителей компьютерной техники лучше всего подходят следующие характеристики?</div>
           <div class="quiz__subtitle">Вы можете выбрать несколько компаний для одной характеристики, либо не отметить ни одной компании.</div>
           <div class="quiz__type">Технологичная</div>
           <div class="quiz__fields">
             <label class="field field--checkbox js-check-nothing">
-              <input class="field__input" type="checkbox" name="nothing"><span class="field__label">Ни одной из перечисленных</span><b></b>
+              <input class="field__input" type="checkbox" name="tekhnologichnaya_nothing"><span class="field__label">Ни одной из перечисленных</span><b></b>
             </label>
           </div>
         </div>
-        <div class="quiz__step quiz__step--12" data-name="otkrytaya">
+        <div class="quiz__step quiz__step--12" data-name="otkrytaya" data-step="step-10">
           <div class="quiz__title">Оцените, каким компаниям российских производителей компьютерной техники лучше всего подходят следующие характеристики?</div>
           <div class="quiz__subtitle">Вы можете выбрать несколько компаний для одной характеристики, либо не отметить ни одной компании.</div>
           <div class="quiz__type">Открытая</div>
           <div class="quiz__fields">
             <label class="field field--checkbox js-check-nothing">
-              <input class="field__input" type="checkbox" name="nothing"><span class="field__label">Ни одной из перечисленных</span><b></b>
+              <input class="field__input" type="checkbox" name="otkrytaya_nothing"><span class="field__label">Ни одной из перечисленных</span><b></b>
             </label>
           </div>
         </div>
@@ -168,7 +168,7 @@
           <div class="quiz__result hidden">Спасибо за участие в исследовании!</div>
         </div>
         <div class="quiz__error d-none">Хотя бы одно поле должно быть выбрано</div>
-        <button class="quiz__next button">Принять участие</button>
+        <button class="quiz__next">Принять участие</button>
       </div>
     </form>
   </body>

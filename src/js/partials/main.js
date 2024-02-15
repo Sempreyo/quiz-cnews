@@ -118,12 +118,12 @@ document.addEventListener('DOMContentLoaded', () => {
 							/* Перед каждым последним чекбоксом вставляем выбранные на предыдущих шагах */
 							checkNothing.forEach((checkbox) => {
 								checkbox.insertAdjacentHTML("beforebegin", `<label class="field field--checkbox">
-									<input class="field__input" type="checkbox" name="${checkbox.closest(".quiz__step").getAttribute("data-name")}_${input.getAttribute("name")}" /><span class="field__label">${input.value}</span><b></b>
+									<input class="field__input" type="checkbox" name="${checkbox.closest(".quiz__step").dataset.name}" value="${input.value}" /><span class="field__label">${input.parentElement.querySelector(".field__label").textContent}</span><b></b>
 								</label>`);
 
 								checkbox.querySelector("input").addEventListener("change", (e) => {
 									const fields = e.currentTarget.closest(".quiz__step").querySelectorAll(".field:not(.js-check-nothing) input");
-	
+
 									if (e.currentTarget.checked) {
 										fields.forEach((el) => {
 											el.value = "";
@@ -142,19 +142,46 @@ document.addEventListener('DOMContentLoaded', () => {
 					quiz.addEventListener("submit", (e) => {
 						e.preventDefault();
 
-						const fields = quiz.querySelectorAll(".field input");
-						const data = [];
+						//const fields = quiz.querySelectorAll(".field input");
+						let data = `{"form":{`;
 
-						fields.forEach((el) => {
-							const name = el.getAttribute("name");
-							const value = el.value;
-							
+						for (let step = 3; step < 13; step++) {
+							const fields = quiz.querySelectorAll(`.quiz__step--${step} .field input`);
 
-							if ((el.getAttribute("type") === "checkbox" && el.checked) || (el.getAttribute("type") === "text" && el.value!= "")) {
-								data.push([name, value]);
+							data += `"step${step}": {`;
+
+							let arr = [];
+							let isEmpty = true;
+							for (let name = 0; name < fields.length; name++) {
+								if ((fields[name].getAttribute("type") === "checkbox" && fields[name].checked) || (fields[name].getAttribute("type") === "text" && fields[name].value!= "")) {
+									if (arr.indexOf(fields[name].getAttribute("name")) == -1) {
+										arr.push(fields[name].getAttribute("name"));
+
+										data += `"${fields[name].value}": [`;
+
+										isEmpty = false;
+									};
+
+									data += `"${fields[name].value}",`;
+									//data += '],';
+								}
 							}
-						});
 
+							if (isEmpty) {
+								data += ``;
+							} else {
+								data += `[]]`;
+							}
+
+							data += (step === 12) ? '}' : '},';
+						}
+
+						data += '}}';
+
+						console.log(data)
+						console.log(JSON.parse(data))
+						
+						
 						fetch("path-to-ajax", {
 							method: "POST",
 							body: data,
