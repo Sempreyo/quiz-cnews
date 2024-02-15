@@ -16,6 +16,18 @@
 		}
 	}
 
+	&__title,
+	&__result {
+		transform: translateY(0);
+		opacity: 1;
+		transition: 0.3s ease;
+
+		&.hidden {
+			transform: translateY(10px);
+			opacity: 0;
+		}
+	}
+
 	&__title {
 		font-size: 24px;
 		line-height: 1.4;

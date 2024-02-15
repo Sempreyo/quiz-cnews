@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 			if (reset) {
 				reset.addEventListener("change", (e) => {
-					const fields = wrapper.querySelectorAll(".field:not(.js-reset-fields) input");
+					const fields = quiz.querySelectorAll(".quiz__step--4 .field:not(.js-reset-fields) input");
 
 					if (e.currentTarget.checked) {
 						fields.forEach((el) => {
@@ -62,59 +62,102 @@ document.addEventListener('DOMContentLoaded', () => {
 		buttonNext.addEventListener("click", (e) => {
 			const stepActive = quiz.querySelector(".quiz__step.open");
 			const checkNothing = quiz.querySelectorAll(".js-check-nothing");
-			const selectedValues = quiz.querySelectorAll(".field:not(.js-reset-fields) input");
+			const selectedValues = quiz.querySelectorAll(".quiz__step--3 .field:not(.js-reset-fields) input, .quiz__step--4 .field:not(.js-reset-fields) input");
+			let isValid = false;
 
-			if (stepCount < 10) {
+			if (stepCount < 12) {
 				e.preventDefault();
 			}
 
-			if (stepCount < 11) {
+			if (stepCount < 13) {
 				/* Проверяем, заполнено ли хотя бы одно значение на каждом шаге, если нет - показываем ошибку, если все норм, пускаем дальше */
-				const selectedValuesStep = quizFieldsWrapper[stepCount - 1].querySelectorAll(".field input");
+				if (stepCount > 2) {
+					const selectedValuesStep = quizFieldsWrapper[stepCount - 3].querySelectorAll(".field input");
 
-				console.log(selectedValuesStep)
+					selectedValuesStep.forEach((input) => {
+						if (input.checked || (input.getAttribute("type") === "text" && input.value !== "") || stepCount < 3 || stepCount > 4) {
+							isValid = true;
+						}
+					});
 
-				selectedValuesStep.forEach((input) => {
-					if (input.checked || (input.getAttribute("type") === "text" && input.value !== "")) {
-						console.log("Поля выбраны, го дальше")
+					if (isValid) {
 						stepActive.classList.remove("open");
 						stepActive.nextElementSibling.classList.add("open");
 						stepCount++;
 						error.classList.add("d-none");
 					} else {
 						error.classList.remove("d-none");
-						console.log("Выберите поле!")
 					}
-				});
+				} else {
+					stepActive.classList.remove("open");
+					stepActive.nextElementSibling.classList.add("open");
+					stepCount++;
+
+					/* Если есть скрытый заголовок, делаем ему анимированное появление */
+					if (stepActive.nextElementSibling.querySelector(".hidden")) {
+						setTimeout(() => {
+							stepActive.nextElementSibling.querySelector(".hidden").classList.remove("hidden");
+						}, 100);
+					}
+				}
 			}
 
 			switch (stepCount) {
 				case 2:
 					buttonNext.textContent = "Вперед";
-
+					break;
+				case 3:
+					buttonNext.textContent = "Больше не знаю";
+					break;
+				case 4:
+					buttonNext.textContent = "Вперед";
+					break;
+				case 5:
 					selectedValues.forEach((input) => {
 						if (input.checked || (input.getAttribute("type") === "text" && input.value != "")) {
 							/* Перед каждым последним чекбоксом вставляем выбранные на предыдущих шагах */
 							checkNothing.forEach((checkbox) => {
 								checkbox.insertAdjacentHTML("beforebegin", `<label class="field field--checkbox">
-								<input class="field__input" type="checkbox" name="${input.getAttribute("name")}" /><span class="field__label">${input.value}</span><b></b>
-							</label>`);
+									<input class="field__input" type="checkbox" name="${checkbox.closest(".quiz__step").getAttribute("data-name")}_${input.getAttribute("name")}" /><span class="field__label">${input.value}</span><b></b>
+								</label>`);
+
+								checkbox.querySelector("input").addEventListener("change", (e) => {
+									const fields = e.currentTarget.closest(".quiz__step").querySelectorAll(".field:not(.js-check-nothing) input");
+	
+									if (e.currentTarget.checked) {
+										fields.forEach((el) => {
+											el.value = "";
+											el.checked = false;
+										});
+									}
+								});
 							});
 						}
 					});
 					break;
-				case 10:
+				case 12:
 					buttonNext.setAttribute("type", "submit");
 					break;
-				case 11:
+				case 13:
 					quiz.addEventListener("submit", (e) => {
 						e.preventDefault();
 
-						const formData = new FormData(quiz);
+						const fields = quiz.querySelectorAll(".field input");
+						const data = [];
+
+						fields.forEach((el) => {
+							const name = el.getAttribute("name");
+							const value = el.value;
+							
+
+							if ((el.getAttribute("type") === "checkbox" && el.checked) || (el.getAttribute("type") === "text" && el.value!= "")) {
+								data.push([name, value]);
+							}
+						});
 
 						fetch("path-to-ajax", {
 							method: "POST",
-							body: formData,
+							body: data,
 						})
 							.then((response) => {
 								console.log(response);
@@ -124,6 +167,13 @@ document.addEventListener('DOMContentLoaded', () => {
 							});
 						buttonNext.classList.add("d-none");
 					});
+
+					/* Если есть скрытый заголовок, делаем ему анимированное появление */
+					if (stepActive.nextElementSibling.querySelector(".hidden")) {
+						setTimeout(() => {
+							stepActive.nextElementSibling.querySelector(".hidden").classList.remove("hidden");
+						}, 100);
+					}
 
 					/* На последнем сообщении скрываем форму после 3 секунд */
 					setTimeout(() => {
