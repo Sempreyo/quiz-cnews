@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
 							/* Перед каждым последним чекбоксом вставляем выбранные на предыдущих шагах */
 							checkNothing.forEach((checkbox) => {
 								checkbox.insertAdjacentHTML("beforebegin", `<label class="field field--checkbox">
-									<input class="field__input" type="checkbox" name="${checkbox.closest(".quiz__step").dataset.name}" value="${input.value}" data-value="${input.value}" /><span class="field__label">${input.parentElement.querySelector(".field__input").value}</span><b></b>
+									<input class="field__input" type="checkbox" name="${checkbox.closest(".quiz__step").dataset.name}" value="${input.value}" data-value="${input.value}" /><span class="field__label">${input.type === "checkbox" ? input.parentElement.querySelector(".field__label").textContent : input.value}</span><b></b>
 								</label>`);
 
 								/* Если был клик по последнему полю, все предыдущие сбрасываются */
@@ -150,50 +150,132 @@ document.addEventListener('DOMContentLoaded', () => {
 					quiz.addEventListener("submit", (e) => {
 						e.preventDefault();
 
+						let arrMass = [];
 						let data = `{"form":{`;
 
 						for (let step = 3; step < 13; step++) {
 							const fields = quiz.querySelectorAll(`.quiz__step--${step} .field input`);
 
+							fields.forEach((x) => {
+								console.log("name " + x.getAttribute("name"))
+								console.log("value " + x.value)
+							})
+							
+
 							data += `"step${step}": {`;
+							arrMass = [];
+							arrIndex = [];
+							arrMemory = [];
 
-							let arr = [];
-							let isEmpty = true;
-							for (let name = 0; name < fields.length; name++) {
-								if ((fields[name].getAttribute("type") === "checkbox" && fields[name].checked) || (fields[name].getAttribute("type") === "text" && fields[name].value!= "")) {
-									if (arr.indexOf(fields[name].getAttribute("name")) == -1) {
-										arr.push(fields[name].getAttribute("name"));
-
-										data += `"${fields[name].getAttribute("name")}": [`;
-
-										isEmpty = false;
-									}
-
-									data += `"${fields[name].value || fields[name].dataset.value}",`;
+							for (let i = 0; i < fields.length; i++) {
+								if (fields[i].value != '') {
+									arrMass.push('"' + fields[i].value + '"');
+									arrIndex.push(fields[i].getAttribute("name"));
+									console.log('Filled' + fields[i].value);
+								} else {
+									console.log('Empty' + fields[i].value);
 								}
 							}
 
-							if (isEmpty) {
-								data += ``;
-							} else {
-								data += `[]]`;
+							let arr = [];
+							let flag = 0;
+							//let isEmpty = true;
+							for (let name = 0; name < fields.length; name++) {
+								if ((fields[name].getAttribute("type") === "checkbox" && fields[name].checked) || (fields[name].getAttribute("type") === "text" && fields[name].value!= "")) {
+									while (arrIndex.length > 0) {
+										let ind = arrIndex.indexOf(fields[name].getAttribute("name"));
+										if (ind != -1) {
+											arrMemory.push(arrMass[ind]);
+											delete arrIndex[ind];// = 'deleted';
+											delete arrMass[ind];// = 'deleted';
+										}
+									}
+
+									if (arr.indexOf(fields[name].getAttribute("name")) == -1) {
+										arr.push(fields[name].getAttribute("name"));
+										data += fields[name].getAttribute("name") + ': ';
+										
+
+										flag = 1;
+										//isEmpty = false;
+									}
+
+									if (name == fields[fields.length - 1] || flag == 1) {
+										arrMemory = [];
+										data += '[' + arrMemory.join(",") + ']';
+
+										if (flag == 1 && name != fields[fields.length - 1]) {
+											data += ',';
+										}
+										arrMass = [];
+										flag = 0;
+									}
+
+									if (fields[name].getAttribute("name") != "rus-company") {
+										// data += `"${fields[name].value}"`;
+									}
+
+									if (
+										fields[name].getAttribute("name").startsWith("company-") && 
+										fields[name+1].getAttribute("name").startsWith("company-")
+									) {
+										//data += "]";
+									}
+
+									// if (step > 3) {
+									// 	data += ",";
+									// } else {
+									// 	if (
+									// 		step == 3 && 
+									// 		fields[name].getAttribute("name").startsWith("company-") && 
+									// 		name !== arrChecked.length - 1
+									// 	) {
+									// 		data += ",";
+									// 	}
+									// }
+
+									// if(fields[name+1])
+									// {
+									// 	data += `
+									// 	"${fields[name].value || fields[name].dataset.value}"
+									// 	${fields[name].getAttribute("name").startsWith("company-") && fields[name+1].getAttribute("name").startsWith("company-") ? "]" : ""}
+									// 	${step > 3 ? "," : ""}
+									// 	${step == 3 && fields[name].getAttribute("name").startsWith("company-") && name !== arrChecked.length - 1 ? "," : ""}`;
+									// }
+									// else
+									// {
+									// 	data += `
+									// 	"${fields[name].value || fields[name].dataset.value}"
+									// 	${fields[name].getAttribute("name").startsWith("company-") && fields[name+1].getAttribute("name").startsWith("company-") ? "]" : ""}
+									// 	${step > 3 ? "" : ""}
+									// 	${step == 3 && fields[name].getAttribute("name").startsWith("company-") && name !== arrChecked.length - 1 ? "" : ""}`;
+									// }
+								}
 							}
+							
+							//data += fields[name].getAttribute("name") + ': [' + arrMass.join(",") + ']';
+
+							// if (isEmpty || step === 3) {
+							// 	data += ``;
+							// } else {
+							// 	data += `[]]`;
+							// }
 
 							data += (step === 12) ? '}' : '},';
 						}
 
 						data += '}}';
 
-						fetch("path-to-ajax", {
-							method: "POST",
-							body: data,
-						})
-							.then((response) => {
-								console.log(response);
-							})
-							.catch((error) => {
-								console.error(error);
-							});
+						console.log(data)
+			
+						$.ajax({
+							type: "POST",
+							url: window.location,
+							data: JSON.parse(data),
+							complete: function(response, textStatus) {
+								if (response.status === 200 && response.responseText) {}
+							}
+						});
 					});
 
 					buttonNext.classList.add("d-none");
@@ -204,11 +286,6 @@ document.addEventListener('DOMContentLoaded', () => {
 							stepActive.nextElementSibling.querySelector(".hidden").classList.remove("hidden");
 						}, 100);
 					}
-
-					/* На последнем сообщении скрываем форму после 3 секунд */
-					setTimeout(() => {
-						quiz.classList.add("d-none");
-					}, 3000);
 					break;
 			}
 		});
