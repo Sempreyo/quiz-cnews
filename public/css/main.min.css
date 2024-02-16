@@ -223,6 +223,7 @@ textarea:focus::placeholder {
   background-color: #2490fb;
   color: #fff;
 }
+.quiz.d-none,
 .quiz .d-none {
   display: none;
 }

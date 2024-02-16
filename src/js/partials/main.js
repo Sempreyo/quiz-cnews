@@ -118,9 +118,10 @@ document.addEventListener('DOMContentLoaded', () => {
 							/* Перед каждым последним чекбоксом вставляем выбранные на предыдущих шагах */
 							checkNothing.forEach((checkbox) => {
 								checkbox.insertAdjacentHTML("beforebegin", `<label class="field field--checkbox">
-									<input class="field__input" type="checkbox" name="${checkbox.closest(".quiz__step").dataset.name}" value="${input.value}" /><span class="field__label">${input.parentElement.querySelector(".field__label").textContent}</span><b></b>
+									<input class="field__input" type="checkbox" name="${checkbox.closest(".quiz__step").dataset.name}" value="${input.value}" data-value="${input.value}" /><span class="field__label">${input.parentElement.querySelector(".field__input").value}</span><b></b>
 								</label>`);
 
+								/* Если был клик по последнему полю, все предыдущие сбрасываются */
 								checkbox.querySelector("input").addEventListener("change", (e) => {
 									const fields = e.currentTarget.closest(".quiz__step").querySelectorAll(".field:not(.js-check-nothing) input");
 
@@ -130,6 +131,13 @@ document.addEventListener('DOMContentLoaded', () => {
 											el.checked = false;
 										});
 									}
+								});
+
+								/* Если был клик по любому полю кроме последнего, последний сбрасывается */
+								checkbox.parentElement.querySelectorAll(".field:not(.js-check-nothing) input").forEach((input) => {
+									input.addEventListener("change", (e) => {
+										checkbox.querySelector("input").checked = false;
+									});
 								});
 							});
 						}
@@ -142,7 +150,6 @@ document.addEventListener('DOMContentLoaded', () => {
 					quiz.addEventListener("submit", (e) => {
 						e.preventDefault();
 
-						//const fields = quiz.querySelectorAll(".field input");
 						let data = `{"form":{`;
 
 						for (let step = 3; step < 13; step++) {
@@ -157,13 +164,12 @@ document.addEventListener('DOMContentLoaded', () => {
 									if (arr.indexOf(fields[name].getAttribute("name")) == -1) {
 										arr.push(fields[name].getAttribute("name"));
 
-										data += `"${fields[name].value}": [`;
+										data += `"${fields[name].getAttribute("name")}": [`;
 
 										isEmpty = false;
-									};
+									}
 
-									data += `"${fields[name].value}",`;
-									//data += '],';
+									data += `"${fields[name].value || fields[name].dataset.value}",`;
 								}
 							}
 
@@ -178,10 +184,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 						data += '}}';
 
-						console.log(data)
-						console.log(JSON.parse(data))
-						
-						
 						fetch("path-to-ajax", {
 							method: "POST",
 							body: data,
@@ -192,8 +194,9 @@ document.addEventListener('DOMContentLoaded', () => {
 							.catch((error) => {
 								console.error(error);
 							});
-						buttonNext.classList.add("d-none");
 					});
+
+					buttonNext.classList.add("d-none");
 
 					/* Если есть скрытый заголовок, делаем ему анимированное появление */
 					if (stepActive.nextElementSibling.querySelector(".hidden")) {
