@@ -11,17 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
 			const toggleFields = wrapper.querySelectorAll(".js-toggle-field .field__label");
 			const reset = quiz.querySelector(".js-reset-fields input");
 			const checkFields = wrapper.querySelectorAll('.field:not(.js-reset-fields) input[type="checkbox"]');
-			const textFields = wrapper.querySelectorAll('.field:not(.js-reset-fields) input[type="text"]');
 
 			checkFields.forEach((el) => {
-				el.addEventListener("change", (e) => {
-					if (e.currentTarget.checked) {
-						reset.checked = false;
-					}
-				});
-			});
-
-			textFields.forEach((el) => {
 				el.addEventListener("change", (e) => {
 					if (e.currentTarget.checked) {
 						reset.checked = false;
@@ -33,11 +24,15 @@ document.addEventListener('DOMContentLoaded', () => {
 				el.addEventListener("click", (e) => {
 					e.currentTarget.parentElement.classList.toggle("active");
 
+					if (e.currentTarget.parentElement.classList.contains("active")) {
+						reset.checked = false;
+					}
+
 					if (i > 1) {
 						let isShowed = false;
 
-						if (!isShowed) {
-							arr[i+1].parentElement.classList.remove("closed");
+						if (!isShowed && arr[i + 1]) {
+							arr[i + 1].parentElement.classList.remove("closed");
 							isShowed = true;
 						}
 					}
@@ -46,11 +41,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
 			if (reset) {
 				reset.addEventListener("change", (e) => {
-					const fields = quiz.querySelectorAll(".quiz__step--4 .field:not(.js-reset-fields) input");
+					const fields = quiz.querySelectorAll(".quiz__step--3 .field:not(.js-reset-fields) input");
 
 					if (e.currentTarget.checked) {
 						fields.forEach((el) => {
-							el.value = "";
+							if (el.getAttribute("type") === "text") {
+								el.value = "";
+							}
+
 							el.checked = false;
 							el.parentElement.classList.remove("active");
 						});
@@ -62,20 +60,21 @@ document.addEventListener('DOMContentLoaded', () => {
 		buttonNext.addEventListener("click", (e) => {
 			const stepActive = quiz.querySelector(".quiz__step.open");
 			const checkNothing = quiz.querySelectorAll(".js-check-nothing");
-			const selectedValues = quiz.querySelectorAll(".quiz__step--3 .field:not(.js-reset-fields) input, .quiz__step--4 .field:not(.js-reset-fields) input");
+			const selectedValues = quiz.querySelectorAll(".quiz__step--2 .field:not(.js-reset-fields) input, .quiz__step--3 .field:not(.js-reset-fields) input");
+			const selectedValuesCopy = quiz.querySelectorAll(".quiz__step--3 .field:not(.js-reset-fields) input");
 			let isValid = false;
 
-			if (stepCount < 12) {
+			if (stepCount < 11) {
 				e.preventDefault();
 			}
 
-			if (stepCount < 13) {
+			if (stepCount < 12) {
 				/* Проверяем, заполнено ли хотя бы одно значение на каждом шаге, если нет - показываем ошибку, если все норм, пускаем дальше */
-				if (stepCount > 2) {
-					const selectedValuesStep = quizFieldsWrapper[stepCount - 3].querySelectorAll(".field input");
+				if (stepCount > 1) {
+					const selectedValuesStep = quizFieldsWrapper[stepCount - 2].querySelectorAll(".field input");
 
 					selectedValuesStep.forEach((input) => {
-						if (input.checked || (input.getAttribute("type") === "text" && input.value !== "") || stepCount < 3 || stepCount > 4) {
+						if (input.checked || (input.getAttribute("type") === "text" && input.value !== "") || stepCount < 2 || stepCount > 3) {
 							isValid = true;
 						}
 					});
@@ -103,17 +102,17 @@ document.addEventListener('DOMContentLoaded', () => {
 			}
 
 			switch (stepCount) {
-				case 2:
+				case 1:
 					buttonNext.textContent = "Вперед";
 					break;
-				case 3:
+				case 2:
 					buttonNext.textContent = "Больше не знаю";
 					break;
-				case 4:
+				case 3:
 					buttonNext.textContent = "Вперед";
 					break;
-				case 5:
-					selectedValues.forEach((input) => {
+				case 4:
+					selectedValuesCopy.forEach((input) => {
 						if (input.checked || (input.getAttribute("type") === "text" && input.value != "")) {
 							/* Перед каждым последним чекбоксом вставляем выбранные на предыдущих шагах */
 							checkNothing.forEach((checkbox) => {
@@ -127,7 +126,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 									if (e.currentTarget.checked) {
 										fields.forEach((el) => {
-											el.value = "";
 											el.checked = false;
 										});
 									}
@@ -143,137 +141,80 @@ document.addEventListener('DOMContentLoaded', () => {
 						}
 					});
 					break;
-				case 12:
+				case 11:
 					buttonNext.setAttribute("type", "submit");
 					break;
-				case 13:
+				case 12:
 					quiz.addEventListener("submit", (e) => {
 						e.preventDefault();
 
-						let arrMass = [];
-						let data = `{"form":{`;
+						let data = '{"form":{';
 
-						for (let step = 3; step < 13; step++) {
+						for (let step = 2; step < 12; step++) {
 							const fields = quiz.querySelectorAll(`.quiz__step--${step} .field input`);
+							let selectedFields = [];
+							let selectedNames = [];
+							let arrCount = 0;
 
-							fields.forEach((x) => {
-								console.log("name " + x.getAttribute("name"))
-								console.log("value " + x.value)
-							})
-							
+							/* Формируем массив выбранных полей на каждом шаге */
+							fields.forEach((field) => {
+								if (
+									field.getAttribute("type") === "checkbox" &&
+									field.checked ||
+									field.getAttribute("type") === "text"
+									&& field.value !== ""
+								) {
+									selectedFields.push(field);
+								}
+							});
 
+							/* Формируем json */
 							data += `"step${step}": {`;
-							arrMass = [];
-							arrIndex = [];
-							arrMemory = [];
 
-							for (let i = 0; i < fields.length; i++) {
-								if (fields[i].value != '') {
-									arrMass.push('"' + fields[i].value + '"');
-									arrIndex.push(fields[i].getAttribute("name"));
-									console.log('Filled' + fields[i].value);
-								} else {
-									console.log('Empty' + fields[i].value);
+							/* Проверяем количество массивов на каждом шаге */
+							selectedFields.forEach((field) => {
+								if (selectedNames.indexOf(field.getAttribute("name")) == -1) {
+									selectedNames.push(field.getAttribute("name"));
+									arrCount++;
 								}
-							}
+							});
 
-							let arr = [];
-							let flag = 0;
-							//let isEmpty = true;
-							for (let name = 0; name < fields.length; name++) {
-								if ((fields[name].getAttribute("type") === "checkbox" && fields[name].checked) || (fields[name].getAttribute("type") === "text" && fields[name].value!= "")) {
-									while (arrIndex.length > 0) {
-										let ind = arrIndex.indexOf(fields[name].getAttribute("name"));
-										if (ind != -1) {
-											arrMemory.push(arrMass[ind]);
-											delete arrIndex[ind];// = 'deleted';
-											delete arrMass[ind];// = 'deleted';
+							selectedNames = [];
+
+							/* Формируем вложенную структуру */
+							selectedFields.forEach((field, index, arr) => {
+								/* Если выбрано несколько полей с одинаковым name, достаем только один name */
+								if (selectedNames.indexOf(field.getAttribute("name")) == -1) {
+									let values = [];
+
+									selectedNames.push(field.getAttribute("name"));
+
+									data += `"${field.getAttribute("name")}": [`;
+
+									arr.forEach((innerField) => {
+										if (innerField.getAttribute("name") == field.getAttribute("name")) {
+											values.push(`"${innerField.value}"`);
 										}
-									}
+									});
 
-									if (arr.indexOf(fields[name].getAttribute("name")) == -1) {
-										arr.push(fields[name].getAttribute("name"));
-										data += fields[name].getAttribute("name") + ': ';
-										
+									data += `${values.join(",")}`;
 
-										flag = 1;
-										//isEmpty = false;
-									}
-
-									if (name == fields[fields.length - 1] || flag == 1) {
-										arrMemory = [];
-										data += '[' + arrMemory.join(",") + ']';
-
-										if (flag == 1 && name != fields[fields.length - 1]) {
-											data += ',';
-										}
-										arrMass = [];
-										flag = 0;
-									}
-
-									if (fields[name].getAttribute("name") != "rus-company") {
-										// data += `"${fields[name].value}"`;
-									}
-
-									if (
-										fields[name].getAttribute("name").startsWith("company-") && 
-										fields[name+1].getAttribute("name").startsWith("company-")
-									) {
-										//data += "]";
-									}
-
-									// if (step > 3) {
-									// 	data += ",";
-									// } else {
-									// 	if (
-									// 		step == 3 && 
-									// 		fields[name].getAttribute("name").startsWith("company-") && 
-									// 		name !== arrChecked.length - 1
-									// 	) {
-									// 		data += ",";
-									// 	}
-									// }
-
-									// if(fields[name+1])
-									// {
-									// 	data += `
-									// 	"${fields[name].value || fields[name].dataset.value}"
-									// 	${fields[name].getAttribute("name").startsWith("company-") && fields[name+1].getAttribute("name").startsWith("company-") ? "]" : ""}
-									// 	${step > 3 ? "," : ""}
-									// 	${step == 3 && fields[name].getAttribute("name").startsWith("company-") && name !== arrChecked.length - 1 ? "," : ""}`;
-									// }
-									// else
-									// {
-									// 	data += `
-									// 	"${fields[name].value || fields[name].dataset.value}"
-									// 	${fields[name].getAttribute("name").startsWith("company-") && fields[name+1].getAttribute("name").startsWith("company-") ? "]" : ""}
-									// 	${step > 3 ? "" : ""}
-									// 	${step == 3 && fields[name].getAttribute("name").startsWith("company-") && name !== arrChecked.length - 1 ? "" : ""}`;
-									// }
+									data += `]${arrCount > 1 && index !== selectedFields.length - 1 ? "," : ""}`;
 								}
-							}
-							
-							//data += fields[name].getAttribute("name") + ': [' + arrMass.join(",") + ']';
+							});
 
-							// if (isEmpty || step === 3) {
-							// 	data += ``;
-							// } else {
-							// 	data += `[]]`;
-							// }
-
-							data += (step === 12) ? '}' : '},';
+							data += (step === 11) ? '}' : '},';
 						}
 
 						data += '}}';
 
-						console.log(data)
-			
 						$.ajax({
 							type: "POST",
 							url: window.location,
 							data: JSON.parse(data),
-							complete: function(response, textStatus) {
-								if (response.status === 200 && response.responseText) {}
+							complete: function (response, textStatus) {
+								if (response.status === 200 && response.responseText) {
+								}
 							}
 						});
 					});

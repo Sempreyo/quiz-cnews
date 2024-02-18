@@ -6,6 +6,10 @@
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
+
+		@include min(768) {
+			padding: 0 20px;
+		}
 	}
 
 	&__step {
@@ -31,6 +35,13 @@
 	&__title {
 		font-size: 24px;
 		line-height: 1.4;
+
+		span {
+			@include min(768) {
+				position: absolute;
+				left: -22px;
+			}
+		}
 	}
 
 	&__subtitle {
@@ -42,9 +53,21 @@
 
 	&__type {
 		font-weight: 700;
-		font-size: 30px;
+		font-size: 22px;
 		line-height: 1.4;
-		margin-top: 50px;
+		margin-top: 30px;
+
+		@include min(768) {
+			font-size: 30px;
+			margin-top: 50px;
+		}
+
+		span {
+			@include min(768) {
+				position: absolute;
+				left: -8px;
+			}
+		}
 	}
 
 	&__fields {
@@ -75,9 +98,13 @@
 		border-radius: 5px;
 		font-size: 20px;
 		line-height: 1.5;
-		margin-top: 50px;
+		margin-top: 30px;
 		cursor: pointer;
 		transition: 0.3s ease;
+
+		@include min(768) {
+			margin-top: 50px;
+		}
 
 		&:hover {
 			background-color: #2490fb;

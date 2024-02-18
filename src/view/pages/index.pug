@@ -10,13 +10,9 @@ block main
 	form.quiz(action='' method='post')
 		.quiz__container.container
 			.quiz__step.quiz__step--1.open
-				.quiz__title Исследовательская компания CNews Analytics приглашает Вас принять участие в опросе и ответить на 3 вопроса об ИТ-рынке. <br>
-					|  Ваши ответы будут использоваться только в обобщенном виде, и только в статистических целях. Заранее благодарим Вас за участие. <br>
-					|  Ваше мнение очень важно для нас!
-			.quiz__step.quiz__step--2
-				.quiz__title.hidden Мы хотели бы поговорить с Вами о российском рынке производителей компьютерной техники. 
-			.quiz__step.quiz__step--3(data-step="step-1")
-				.quiz__title Если говорить о российских производителях компьютерной техники, какие компании Вы знаете?
+				.quiz__title Мы хотели бы поговорить с Вами о российском рынке производителей компьютерной техники.
+			.quiz__step.quiz__step--2(data-step="step-1")
+				.quiz__title <span>1.</span> Если говорить о российских производителях компьютерной техники, какие компании Вы знаете?
 				.quiz__fields
 					label.field.js-toggle-field.active
 						span.field__label 1-я компания
@@ -39,8 +35,8 @@ block main
 					label.field.js-toggle-field.closed
 						span.field__label 7-я компания
 						input.field__input(type='text', name='company-7', placeholder='Введите название компании')
-			.quiz__step.quiz__step--4(data-step="step-2")
-				.quiz__title Каких российских производителей компьютерной техники, указанных ниже, Вы знаете? Пожалуйста, отметьте все компании, которые Вы знаете, даже те, которые указывали ранее. 
+			.quiz__step.quiz__step--3(data-step="step-2")
+				.quiz__title <span>2.</span> Каких российских производителей компьютерной техники, указанных ниже, Вы знаете? Пожалуйста, отметьте все компании, которые Вы знаете, даже те, которые указывали ранее.
 				.quiz__fields
 					label.field.field--checkbox
 						input.field__input(type='checkbox', name='rus-company', value='aquarius')
@@ -85,79 +81,79 @@ block main
 						input.field__input(type='checkbox', name='so_hard', value='Затрудняюсь ответить')
 						span.field__label Затрудняюсь ответить
 						b
-			.quiz__step.quiz__step--5(data-name="nadezhnaya", data-step="step-3")
-				.quiz__title Оцените, каким компаниям российских производителей компьютерной техники лучше всего подходят следующие характеристики?
+			.quiz__step.quiz__step--4(data-name="nadezhnaya", data-step="step-3")
+				.quiz__title <span>3.</span> Оцените, каким компаниям российских производителей компьютерной техники лучше всего подходят следующие характеристики?
 				.quiz__subtitle Вы можете выбрать несколько компаний для одной характеристики, либо не отметить ни одной компании.
-				.quiz__type Надежная
+				.quiz__type <span>a.</span> Надежная
 				.quiz__fields
 					label.field.field--checkbox.js-check-nothing
 						input.field__input(type='checkbox', name='nadezhnaya', value='nothing')
 						span.field__label Ни одной из перечисленных
 						b
-			.quiz__step.quiz__step--6(data-name="otvetstvennaya", data-step="step-4")
-				.quiz__title Оцените, каким компаниям российских производителей компьютерной техники лучше всего подходят следующие характеристики?
+			.quiz__step.quiz__step--5(data-name="otvetstvennaya", data-step="step-4")
+				.quiz__title <span>3.</span> Оцените, каким компаниям российских производителей компьютерной техники лучше всего подходят следующие характеристики?
 				.quiz__subtitle Вы можете выбрать несколько компаний для одной характеристики, либо не отметить ни одной компании.
-				.quiz__type Ответственная
+				.quiz__type <span>b.</span> Ответственная
 				.quiz__fields
 					label.field.field--checkbox.js-check-nothing
 						input.field__input(type='checkbox', name='otvetstvennaya', value='nothing')
 						span.field__label Ни одной из перечисленных
 						b
-			.quiz__step.quiz__step--7(data-name="klientoorientirovannaya", data-step="step-5")
-				.quiz__title Оцените, каким компаниям российских производителей компьютерной техники лучше всего подходят следующие характеристики?
+			.quiz__step.quiz__step--6(data-name="klientoorientirovannaya", data-step="step-5")
+				.quiz__title <span>3.</span> Оцените, каким компаниям российских производителей компьютерной техники лучше всего подходят следующие характеристики?
 				.quiz__subtitle Вы можете выбрать несколько компаний для одной характеристики, либо не отметить ни одной компании.
-				.quiz__type Клиентоориентированная
+				.quiz__type <span>c.</span> Клиентоориентированная
 				.quiz__fields
 					label.field.field--checkbox.js-check-nothing
 						input.field__input(type='checkbox', name='klientoorientirovannaya', value='nothing')
 						span.field__label Ни одной из перечисленных
 						b
-			.quiz__step.quiz__step--8(data-name="innovatsionnaya", data-step="step-6")
-				.quiz__title Оцените, каким компаниям российских производителей компьютерной техники лучше всего подходят следующие характеристики?
+			.quiz__step.quiz__step--7(data-name="innovatsionnaya", data-step="step-6")
+				.quiz__title <span>3.</span> Оцените, каким компаниям российских производителей компьютерной техники лучше всего подходят следующие характеристики?
 				.quiz__subtitle Вы можете выбрать несколько компаний для одной характеристики, либо не отметить ни одной компании.
-				.quiz__type Инновационная
+				.quiz__type <span>d.</span> Инновационная
 				.quiz__fields
 					label.field.field--checkbox.js-check-nothing
 						input.field__input(type='checkbox', name='innovatsionnaya', value='nothing')
 						span.field__label Ни одной из перечисленных
 						b
-			.quiz__step.quiz__step--9(data-name="effektivnaya", data-step="step-7")
-				.quiz__title Оцените, каким компаниям российских производителей компьютерной техники лучше всего подходят следующие характеристики?
+			.quiz__step.quiz__step--8(data-name="effektivnaya", data-step="step-7")
+				.quiz__title <span>3.</span> Оцените, каким компаниям российских производителей компьютерной техники лучше всего подходят следующие характеристики?
 				.quiz__subtitle Вы можете выбрать несколько компаний для одной характеристики, либо не отметить ни одной компании.
-				.quiz__type Эффективная
+				.quiz__type <span>e.</span> Эффективная
 				.quiz__fields
 					label.field.field--checkbox.js-check-nothing
 						input.field__input(type='checkbox', name='effektivnaya', value='nothing')
 						span.field__label Ни одной из перечисленных
 						b
-			.quiz__step.quiz__step--10(data-name="sovremennaya", data-step="step-8")
-				.quiz__title Оцените, каким компаниям российских производителей компьютерной техники лучше всего подходят следующие характеристики?
+			.quiz__step.quiz__step--9(data-name="sovremennaya", data-step="step-8")
+				.quiz__title <span>3.</span> Оцените, каким компаниям российских производителей компьютерной техники лучше всего подходят следующие характеристики?
 				.quiz__subtitle Вы можете выбрать несколько компаний для одной характеристики, либо не отметить ни одной компании.
-				.quiz__type Современная
+				.quiz__type <span>f.</span> Современная
 				.quiz__fields
 					label.field.field--checkbox.js-check-nothing
 						input.field__input(type='checkbox', name='sovremennaya', value='nothing')
 						span.field__label Ни одной из перечисленных
 						b
-			.quiz__step.quiz__step--11(data-name="tekhnologichnaya", data-step="step-9")
-				.quiz__title Оцените, каким компаниям российских производителей компьютерной техники лучше всего подходят следующие характеристики?
+			.quiz__step.quiz__step--10(data-name="tekhnologichnaya", data-step="step-9")
+				.quiz__title <span>3.</span> Оцените, каким компаниям российских производителей компьютерной техники лучше всего подходят следующие характеристики?
 				.quiz__subtitle Вы можете выбрать несколько компаний для одной характеристики, либо не отметить ни одной компании.
-				.quiz__type Технологичная
+				.quiz__type <span>g.</span> Технологичная
 				.quiz__fields
 					label.field.field--checkbox.js-check-nothing
 						input.field__input(type='checkbox', name='tekhnologichnaya', value='nothing')
 						span.field__label Ни одной из перечисленных
 						b
-			.quiz__step.quiz__step--12(data-name="otkrytaya", data-step="step-10")
-				.quiz__title Оцените, каким компаниям российских производителей компьютерной техники лучше всего подходят следующие характеристики?
+			.quiz__step.quiz__step--11(data-name="otkrytaya", data-step="step-10")
+				.quiz__title <span>3.</span> Оцените, каким компаниям российских производителей компьютерной техники лучше всего подходят следующие характеристики?
 				.quiz__subtitle Вы можете выбрать несколько компаний для одной характеристики, либо не отметить ни одной компании.
-				.quiz__type Открытая
+				.quiz__type <span>h.</span> Открытая
 				.quiz__fields
 					label.field.field--checkbox.js-check-nothing
 						input.field__input(type='checkbox', name='otkrytaya', value='nothing')
 						span.field__label Ни одной из перечисленных
 						b
-			.quiz__step.quiz__step--13
+			.quiz__step.quiz__step--12
 				.quiz__result.hidden Спасибо за участие в исследовании!
 			.quiz__error.d-none Хотя бы одно поле должно быть выбрано
 			button.quiz__next Принять участие

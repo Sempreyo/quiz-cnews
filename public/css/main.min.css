@@ -148,6 +148,11 @@ textarea:focus::placeholder {
       -ms-flex-pack: center;
           justify-content: center;
 }
+@media only screen and (min-width: 768px) {
+  .quiz__container {
+    padding: 0 20px;
+  }
+}
 .quiz__step {
   display: none;
 }
@@ -172,6 +177,12 @@ textarea:focus::placeholder {
   font-size: 24px;
   line-height: 1.4;
 }
+@media only screen and (min-width: 768px) {
+  .quiz__title span {
+    position: absolute;
+    left: -22px;
+  }
+}
 .quiz__subtitle {
   font-size: 20px;
   line-height: 1.4;
@@ -180,9 +191,21 @@ textarea:focus::placeholder {
 }
 .quiz__type {
   font-weight: 700;
-  font-size: 30px;
+  font-size: 22px;
   line-height: 1.4;
-  margin-top: 50px;
+  margin-top: 30px;
+}
+@media only screen and (min-width: 768px) {
+  .quiz__type {
+    font-size: 30px;
+    margin-top: 50px;
+  }
+}
+@media only screen and (min-width: 768px) {
+  .quiz__type span {
+    position: absolute;
+    left: -8px;
+  }
 }
 .quiz__fields {
   display: -webkit-box;
@@ -214,10 +237,15 @@ textarea:focus::placeholder {
   border-radius: 5px;
   font-size: 20px;
   line-height: 1.5;
-  margin-top: 50px;
+  margin-top: 30px;
   cursor: pointer;
   -webkit-transition: 0.3s ease;
   transition: 0.3s ease;
+}
+@media only screen and (min-width: 768px) {
+  .quiz__next {
+    margin-top: 50px;
+  }
 }
 .quiz__next:hover {
   background-color: #2490fb;
